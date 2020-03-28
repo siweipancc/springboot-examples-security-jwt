@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/examples_security_jwt?serverTimezone=Asia/Shanghai
+    username: examples_security_jwt
+    password: examples_security_jwt
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+      # \u81EA\u5B9A\u4E49ID\u4EA7\u751F\u5668
+      use-new-id-generator-mappings: false
+  devtools:
+    # \u907F\u514D\u5F80 SecurityContext \u4E2D\u6CE8\u5165\u9ED8\u8BA4 admin['ROLE_ADMIN']
+    add-properties: true
+logging:
+  level:
+    web: debug
+    cn.pancc: debug

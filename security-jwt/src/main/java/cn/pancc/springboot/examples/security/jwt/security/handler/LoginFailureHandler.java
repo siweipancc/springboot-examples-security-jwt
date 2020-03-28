@@ -1,0 +1,28 @@
+package cn.pancc.springboot.examples.security.jwt.security.handler;
+
+import cn.pancc.springboot.examples.security.jwt.BaseEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * @author pancc
+ * @version 1.0
+ */
+
+public class LoginFailureHandler implements AuthenticationFailureHandler {
+    private static ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+        response.setHeader("content-type", MediaType.APPLICATION_JSON_VALUE);
+        objectMapper.writeValue(response.getOutputStream(), new BaseEntity().setStatus(HttpStatus.BAD_REQUEST.value()).setMessage(exception.getMessage()));
+    }
+}
